@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dido</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/add_form.js' %}"></script>
+</head>
+
+<body>
+    <h1 id="date">Today</h1>
+
+    <div class="tracker-container">
+
+        <div class="done">
+            <h1>Yesterday</h1>
+
+            <div class="task-completed">
+                <h3>Wireframe Dido Website</h3>
+                <div>
+                    <button class="tracker-button">Edit</button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="todo">
+
+            <div class="todo-header">
+                <h1>Today</h1>
+            </div>
+
+            {% for task in tasks %}
+            <div class="task">
+
+                <h3>{{task.item}}</h3>
+
+                <div class="buttons">
+                    <!-- TODO submit to DB to alter is_complete property -->
+                    <!-- TODO add functionality for editing -->
+                    <!-- TODO Implement dropdown -->
+                    <button class="tracker-button">Edit</button>
+                    <button class="tracker-button">Done</button>
+                </div>
+            </div>
+            {% empty %}
+                <div class="task">
+                    <h3>No tasks yet!</h3>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <button class="open-button" onclick="openForm()">Add+</button>
+
+    <div class="form-popup" id="addForm">
+        <form action="{% url 'main' %}" method="post" class="form-container">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Create Task</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
