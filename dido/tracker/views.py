@@ -14,6 +14,6 @@ def main(request):
             return redirect('main')  # Redirect to a named URL pattern, not a template
 
     # Fetch tasks regardless of whether it was GET or POST
-    tasks = Task.objects.all()
+    tasks = reversed(Task.objects.all())
     context = {'tasks': tasks, 'form': form}
     return render(request, "main.html", context)

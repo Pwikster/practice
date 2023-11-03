@@ -29,23 +29,6 @@ body {
     display: flex;
 }
 
-.done,
-.todo {
-    padding: 32px;
-    flex: 1;
-}
-
-.todo-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-}
-
 .tracker-button {
     width: 4em;
     height: 2em;
@@ -67,17 +50,19 @@ body {
     scale: 0.9;
 }
 
+.buttons {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Task Styling */
+
 .task-completed,
 .task {
-    padding: 12px;
+    padding: 4px 0px 4px 10px;
     border-radius: 10px;
-
     margin-bottom: 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
 }
 
 .task {
@@ -88,11 +73,55 @@ body {
     background-color: olivedrab;
 }
 
+.task-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.done,
+.todo {
+    padding: 32px;
+    flex: 1;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Description styling */
+
+.desc {
+    display: none;
+}
+
+.desc-button,
+.desc-button-reverse {
+    background-color: transparent;
+    border: none;
+}
+
+.desc-button:hover,
+.desc-button-reverse:hover {
+    cursor: pointer;
+}
+
+.desc-button img {
+    height: 1em;
+}
+
+.desc-button-reverse img {
+    height: 1em;
+    rotate: 180deg;
+}
+
 /* Pop up form styling */
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-    background-color: #555;
+    background-color: #333;
     color: white;
     padding: 16px 20px;
     border: none;
@@ -112,7 +141,11 @@ body {
     position: fixed;
     bottom: 0;
     right: 15px;
-    border: 3px solid #f1f1f1;
+
+    background-color: #333;
+    color: white;
+
+
     z-index: 9;
 
     border-radius: 10px;
@@ -122,7 +155,6 @@ body {
 .form-container {
     max-width: 300px;
     padding: 10px;
-    background-color: white;
 }
 
 /* Full-width input fields */
@@ -144,7 +176,7 @@ body {
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-    background-color: #04AA6D;
+    background-color: seagreen;
     color: white;
     padding: 16px 20px;
     border: none;
@@ -158,7 +190,7 @@ body {
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-    background-color: red;
+    background-color: palevioletred;
 }
 
 /* Add some hover effects to buttons */
