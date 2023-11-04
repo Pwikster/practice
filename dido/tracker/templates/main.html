@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/add_form.js' %}"></script>
     <script src="{% static 'js/desc_popup.js' %}"></script>
+    <script src="{% static 'js/edit_form.js' %}"></script>
 </head>
 
 <body>
@@ -29,15 +30,28 @@
             </div>
 
             {% for task in tasks %}
-            <div class="task">
+            <div class="task {% if task.is_done %}task-completed{% endif %}">
 
                 <div class="task-upper">
                     <h3>{{task.item}}</h3>
                     <div class="buttons">
-                        <!-- TODO submit to DB to alter is_complete property -->
+
                         <!-- TODO add functionality for editing -->
-                        <button class="tracker-button">Edit</button>
-                        <button class="tracker-button">Done</button>
+                        <button class="tracker-button" onclick="displayEditForm('{{ task.id }}')">Edit</button>
+
+                        <div id="editForm-{{ task.id }}" style="display: none;">
+                            <form action="{% url 'edit_task' task.id %}" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit">Save Changes</button>
+                            </form>
+                        </div>
+
+                        <form action="{% url 'mark_task_done' task.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="tracker-button">Done</button>
+                        </form>
+
                     </div>
                 </div>
 
