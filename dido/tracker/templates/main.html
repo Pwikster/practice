@@ -13,7 +13,13 @@
 </head>
 
 <body>
-    <h1 id="date">Today</h1>
+
+    <h1>Welcome, {{ user.username }}! </h1>
+    <h1 id="date">Today <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+</h1>
 
     <div class="tracker-container">
 
@@ -26,6 +32,7 @@
         <div class="todo">
 
             <div class="todo-header">
+                <!-- TODO Change to current date -->
                 <h1>Today</h1>
             </div>
 
@@ -33,10 +40,15 @@
             <div class="task {% if task.is_done %}task-completed{% endif %}">
 
                 <div class="task-upper">
-                    <h3>{{task.item}}</h3>
-                    <div class="buttons">
-
-                        <!-- TODO add functionality for editing -->
+                    <h4>{{task.item}}</h4>
+                    <p>{{task.created_at}}</p>
+                    <div>
+                        <!-- TODO Filter by date -->
+                        <form action="{% url 'delete_task' task.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="tracker-button"
+                                onclick="return confirm('Are you sure?');">Delete</button>
+                        </form>
                         <button class="tracker-button" onclick="displayEditForm('{{ task.id }}')">Edit</button>
 
                         <div id="editForm-{{ task.id }}" style="display: none;">
@@ -79,14 +91,14 @@
 
     </div>
 
-    <button class="open-button" onclick="openForm()">Add+</button>
+    <button class="open-button" onclick="openForm()">Add Task</button>
 
     <div class="form-popup" id="addForm">
         <form action="{% url 'main' %}" method="post" class="form-container">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn">Create Task</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <button type="button" class="btn cancel">Close</button>
         </form>
     </div>
 

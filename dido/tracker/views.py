@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.forms import UserCreationForm
 from .models import Task
 from .forms import TaskForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def main(request):
     # Initialize the form
     form = TaskForm()
@@ -40,3 +43,21 @@ def edit_task(request, task_id):
     else:
         form = TaskForm(instance=task)
     return render(request, "edit_task.html", {"form": form})
+
+
+@require_POST
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.delete()
+    return redirect("main")
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+    else:
+        form = UserCreationForm()
+    return render(request, "register.html", {"form": form})

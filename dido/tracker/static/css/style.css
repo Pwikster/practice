@@ -8,6 +8,7 @@
 
 body {
     background-color: #222;
+    color: white;
 }
 
 #date {
@@ -50,11 +51,6 @@ body {
     scale: 0.9;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-
-}
 
 /* Task Styling */
 
@@ -62,7 +58,7 @@ body {
 .task {
     padding: 4px 0px 4px 10px;
     border-radius: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 }
 
 .task {
@@ -130,7 +126,7 @@ body {
     position: fixed;
     bottom: 23px;
     right: 28px;
-    width: 280px;
+    width: 200px;
 
     border-radius: 10px;
 }

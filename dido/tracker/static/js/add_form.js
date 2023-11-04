@@ -1,12 +1,12 @@
 console.log('form loaded...')
 
-function openForm(){
+function openForm() {
     console.log('Form Opened')
     document.getElementById('addForm').style.display = 'block'
 }
 
 
-function closeForm(){
+function closeForm() {
     console.log('Form Closed')
     document.getElementById('addForm').style.display = 'none'
 }
